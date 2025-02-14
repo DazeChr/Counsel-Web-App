@@ -1,0 +1,68 @@
+{{#if deletedUsuario}}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Usuario Eliminado Exitosamente.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}
+
+<div class="row">
+  <div class="col-6"><h1>Usuarios</h1></div>
+  <div class="col-6 d-flex justify-content-end">
+    <a href="/addusuario" type="button" class="btn btn-primary align-self-center">
+    Agregar Usuario</a>
+  </div>
+
+</div>
+
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Correo</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Cel. Familiar</th>
+      <th scope="col">Direccion</th>
+      <th scope="col">Clave</th>
+      <th scope="col">Conducta</th>
+      <th scope="col">Status</th>
+      <th scope="col" class="text-end">Accion</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  
+  {{#each rows}}
+    <tr>
+      <th scope="row">{{this.id_usuario}}</th>
+      <td>{{this.nombre_usuario}}</td>
+      <td>{{this.apellido_usuario}}</td>
+      <td>{{this.correo_usuario}}</td>
+      <td>{{this.telefono_usuario}}</td>
+      <td>{{this.cel_familiar_usuario}}</td>
+      <td>{{this.direccion_usuario}}</td>
+      <td>{{this.clave_usuario}}</td>
+      <td>{{this.conducta_usuario}}</td>
+      <td>{{this.status_usuario}}</td>
+      <td class="text-end">
+        <a href="/viewusuario/{{this.id_usuario}}" type="button" class="btn btn-light btn-small"><i class="bi bi-eye"></i>Ver</a>
+        <a href="/editusuario/{{this.id_usuario}}" type="button" class="btn btn-light btn-small"><i class="bi bi-pencil"></i>Editar</a>
+        <a href="/{{this.id_usuario}}" type="button" class="btn btn-light btn-small" onclick="confirmDelete(event, {{this.id_usuario}})" ><i class="bi bi-trash"></i>Borrar</a>
+      </td>
+    </tr>
+    {{/each}}
+
+  <script>
+    function confirmDelete(event, id_usuario) {
+      // Evita que el enlace se ejecute inmediatamente
+      event.preventDefault(); 
+      if (confirm('¿Estás seguro de que deseas borrar este usuario?')) {
+          // Si el usuario confirma, redirige a la URL de borrado
+          window.location.href = `/${id_usuario}`;
+      }
+    }
+  </script>
+
+  </tbody>
+</table>
